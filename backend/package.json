@@ -1,0 +1,12 @@
+{
+  "name": "coronary-blockage-backend",
+  "version": "1.0.0",
+  "description": "Flask REST API for Coronary Blockage Detection",
+  "scripts": {
+    "dev": "python app.py",
+    "train": "python model/train.py",
+    "start": "python app.py"
+  },
+  "keywords": ["coronary", "blockage", "ml", "flask"],
+  "author": ""
+}

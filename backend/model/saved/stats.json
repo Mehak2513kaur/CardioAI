@@ -1,0 +1,99 @@
+{
+  "hybrid_accuracy": 0.7037,
+  "auc_score": 0.6868,
+  "rf_accuracy": 0.6667,
+  "svm_accuracy": 0.5926,
+  "train_samples": 107,
+  "test_samples": 27,
+  "total_samples": 134,
+  "split": "80/20",
+  "confusion_matrix": [
+    [
+      9,
+      5
+    ],
+    [
+      3,
+      10
+    ]
+  ],
+  "classification_report": {
+    "0": {
+      "precision": 0.75,
+      "recall": 0.6428571428571429,
+      "f1-score": 0.6923076923076923,
+      "support": 14.0
+    },
+    "1": {
+      "precision": 0.6666666666666666,
+      "recall": 0.7692307692307693,
+      "f1-score": 0.7142857142857143,
+      "support": 13.0
+    },
+    "accuracy": 0.7037037037037037,
+    "macro avg": {
+      "precision": 0.7083333333333333,
+      "recall": 0.7060439560439561,
+      "f1-score": 0.7032967032967032,
+      "support": 27.0
+    },
+    "weighted avg": {
+      "precision": 0.7098765432098765,
+      "recall": 0.7037037037037037,
+      "f1-score": 0.7028897028897029,
+      "support": 27.0
+    }
+  },
+  "class_distribution": {
+    "Normal": 67,
+    "Blockage": 67
+  },
+  "feature_names": [
+    "Vessel Area",
+    "Contrast",
+    "Energy"
+  ],
+  "feature_importances": {
+    "Recon Area": 0.1009,
+    "Contrast": 0.0537,
+    "Energy": 0.0642,
+    "Homo": 0.09,
+    "Corr": 0.0526
+  },
+  "roc": {
+    "fpr": [
+      0.0,
+      0.0,
+      0.0714,
+      0.0714,
+      0.1429,
+      0.1429,
+      0.2143,
+      0.2143,
+      0.3571,
+      0.3571,
+      0.5714,
+      0.5714,
+      0.9286,
+      0.9286,
+      1.0
+    ],
+    "tpr": [
+      0.0,
+      0.0769,
+      0.0769,
+      0.1538,
+      0.1538,
+      0.3077,
+      0.3077,
+      0.4615,
+      0.4615,
+      0.8462,
+      0.8462,
+      0.9231,
+      0.9231,
+      1.0,
+      1.0
+    ]
+  }
+}
