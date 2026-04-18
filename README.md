@@ -9,6 +9,35 @@ CoronaryAI is a medical-grade computer vision platform designed to detect blocka
 
 ---
 
+## 🖼️ Visual Showcase
+
+<details open>
+  <summary><b>1. Intelligent Landing Page</b></summary>
+  <br/>
+  <img src="assets/home.png" alt="CardioAI Home" width="100%" />
+</details>
+
+<details>
+  <summary><b>2. High-Precision Scan & Analysis</b></summary>
+  <br/>
+  <img src="assets/results.png" alt="Analysis View" width="100%" />
+  <p><i>Real-time vessel density heatmap and electric blue clinical markers pinpointing potential occlusions.</i></p>
+</details>
+
+<details>
+  <summary><b>3. Clinical Reporting & Diagnostics</b></summary>
+  <br/>
+  <img src="assets/upload.png" alt="Clinical Report" width="100%" />
+</details>
+
+<details>
+  <summary><b>4. Performance Dashboard</b></summary>
+  <br/>
+  <img src="assets/dashboard.png" alt="Model Dashboard" width="100%" />
+</details>
+
+---
+
 ## ✨ Key Features
 
 ### 🔍 Explainable AI (XAI) Heatmaps
