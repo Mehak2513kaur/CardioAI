@@ -93,30 +93,36 @@ def _generate_overlay(img_gray, pred_class, confidence):
     # Set transparency based on vesselness
     heatmap_rgba[:, :, 3] = np.clip(v_norm.astype(np.uint16) * 2, 0, 255).astype(np.uint8)
 
-    # 4. PINPOINT BLOCKAGE using Weighted Centroid
-    # This is mathematically guaranteed to always land ON the vessel structure.
-    # We compute the "center of mass" of the vesselness map.
-    # High vesselness pixels pull the centroid toward them — corners only matter
-    # if ALL the vessels are there (physically impossible in angiograms).
-    
+    # 4. PINPOINT BLOCKAGE using Heatmap Peak (Hotspot Detection)
+    # This ensures the marker lands on the most prominent vessel structure
+    # and stays away from noisy image boundaries.
     if pred_class == 1:
-        total_weight = float(np.sum(v_norm))
+        # Create a "Safe Zone" mask (ignore noise at the very edges)
+        mask = np.zeros_like(v_norm, dtype=np.float32)
+        pad = int(min(h, w) * 0.12)  # 12% border safety
+        mask[pad:h-pad, pad:w-pad] = 1.0
         
-        if total_weight > 0:
-            # Build coordinate grids
-            y_coords, x_coords = np.indices(v_norm.shape)
+        # Apply mask and blur to find "Smooth Hotspot"
+        v_weighted = v_norm.astype(np.float32) * mask
+        v_blurred = cv2.GaussianBlur(v_weighted, (51, 51), 0)
+        
+        # Find the pixel with maximum vesselness intensity
+        _, max_val, _, max_loc = cv2.minMaxLoc(v_blurred)
+        
+        if max_val > 0:
+            cx, cy = max_loc
             
-            # Weighted average coordinates
-            cx = int(np.sum(x_coords * v_norm.astype(np.float32)) / total_weight)
-            cy = int(np.sum(y_coords * v_norm.astype(np.float32)) / total_weight)
+            # Final clamping to ensure circle radius (35) + padding (10) stays fully in bounds
+            cx = int(np.clip(cx, 45, w - 45))
+            cy = int(np.clip(cy, 45, h - 45))
             
             # Draw a clean, high-visibility ELECTRIC BLUE marker
-            # Outer ring
+            # Outer ring (Glassy glow)
             cv2.circle(heatmap_rgba, (cx, cy), 35, (255, 220, 0, 255), 4)
-            # Inner ring (pulsing glow effect)
-            cv2.circle(heatmap_rgba, (cx, cy), 27, (255, 220, 0, 130), 2)
-            # Center dot
-            cv2.circle(heatmap_rgba, (cx, cy), 5, (255, 220, 0, 255), -1)
+            # Inner ring (Glow ring)
+            cv2.circle(heatmap_rgba, (cx, cy), 27, (255, 220, 0, 140), 2)
+            # Core pinpoint dot
+            cv2.circle(heatmap_rgba, (cx, cy), 6, (255, 220, 0, 255), -1)
 
     _, buf = cv2.imencode('.png', heatmap_rgba)
     return base64.b64encode(buf).decode()

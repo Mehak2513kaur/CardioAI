@@ -1,3 +1,12 @@
+---
+title: CardioAI
+emoji: 🫀
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+app_file: app.py
+---
 # 🫀 CardioAI: Advanced Cardiac Diagnostic Intelligence
 
 [![React](https://img.shields.io/badge/Frontend-React%2018-blue?logo=react)](https://reactjs.org/)
