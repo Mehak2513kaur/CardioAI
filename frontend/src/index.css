@@ -528,6 +528,57 @@ body {
   .recharts-wrapper, .recharts-responsive-container { max-width: 100% !important; }
 }
 
+/* ─── Showcase Banner (Floating Alert) ─────────────────────────────────────── */
+.showcase-banner {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1.5rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(15px);
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.banner-main-info {
+  display: flex; align-items: center; gap: 1rem;
+  font-family: var(--font-head);
+  font-size: 2.2rem; /* Much larger */
+  font-weight: 900; letter-spacing: -1.5px;
+}
+
+.banner-severity {
+  display: flex; align-items: center; gap: 0.8rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.7rem 1.6rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.severity-label {
+  font-size: 0.95rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  opacity: 0.8;
+}
+
+.severity-val {
+  font-family: var(--font-head);
+  font-size: 1.5rem; /* Larger */
+  font-weight: 900; text-transform: uppercase;
+}
+
+/* Active Warning Pulse for Blockage Detected */
+.showcase-banner[style*="rgba(225, 29, 72"] {
+  animation: bannerDangerPulse 2s infinite ease-in-out;
+}
+
+@keyframes bannerDangerPulse {
+  0%, 100% { background-color: rgba(225, 29, 72, 0.9); }
+  50% { background-color: rgba(190, 18, 60, 0.95); box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.3); }
+}
+
 /* ─── Utilities ─────────────────────────────────────────────────────────────── */
 @keyframes fadeInUp { from{transform:translateY(24px);opacity:0} to{transform:translateY(0);opacity:1} }
 
