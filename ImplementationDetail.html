@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioAI | Real-Life Implementation & Dedication</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff2d55;
+            --secondary: #5856d6;
+            --accent: #007aff;
+            --bg: #050505;
+            --text: #ffffff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .background-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 45, 85, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
+        }
+
+        .blob-1 { top: -10%; left: -10%; background: radial-gradient(circle, rgba(88, 86, 214, 0.15) 0%, transparent 70%); }
+        .blob-2 { bottom: -10%; right: -10%; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 100px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .heart-container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: scaleIn 1.5s 0.5s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .heart-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 30px rgba(255, 45, 85, 0.3));
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(255, 45, 85, 0.3)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 50px rgba(255, 45, 85, 0.5)); }
+        }
+
+        .tribute-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            padding: 4rem;
+            border-radius: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        .gratitude-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .mam-name {
+            color: var(--primary);
+            font-size: 3.5rem;
+            display: block;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(255, 45, 85, 0.4);
+        }
+
+        .description {
+            font-size: 1.25rem;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .real-life-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 30px;
+            text-align: left;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .feature-desc {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 45, 85, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 700;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <header class="container">
+        <div class="badge">VISION BEYOND CODE</div>
+        <h1 class="hero-title">Not Just a Project.</h1>
+        <p class="hero-subtitle">Real-Life Implementation</p>
+        
+        <div class="heart-container">
+            <img src="implementation_heart.png" alt="Digital Heart" class="heart-image" onerror="this.src='https://cdn.pixabay.com/photo/2017/09/25/11/55/heart-2784914_1280.png'">
+        </div>
+
+        <p class="description">
+            CardioAI is our commitment to real-world cardiac diagnostic intelligence. 
+            Designed for clinical accuracy, built for life-saving speed.
+        </p>
+    </header>
+
+    <section class="tribute-section container">
+        <div class="glass-card">
+            <h2 class="gratitude-text">Special Gratitude to</h2>
+            <span class="mam-name">Dr. Vidhi Mam</span>
+            <p class="description">
+                Thank you, Mam, for your unparalleled guidance and inspiration. 
+                Your vision transformed this from a technical experiment into a 
+                meaningful, real-life healthcare implementation.
+            </p>
+            <div class="real-life-grid">
+                <div class="feature-card">
+                    <div class="feature-title">Clinical Accuracy</div>
+                    <p class="feature-desc">Engineered with rigorous medical datasets, ensuring reliable vessel detection in real angiograms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">Human-Centric AI</div>
+                    <p class="feature-desc">Not just numbers—explainable heatmaps designed to assist radiologists in critical decision moments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">Beyond the Canvas</div>
+                    <p class="feature-desc">This implementation bridges the gap between machine learning research and frontline hospital workflows.</p>
+                </div>
+            </div>
+            
+            <a href="frontend/index.html" class="cta-button">Enter Implementation</a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 CARDIOAI · THE REAL LIFE IMPLEMENTATION
+    </footer>
+
+    <script>
+        // Smooth reveal on scroll logic (could add more if needed)
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("CardioAI Implementation Page Loaded");
+        });
+    </script>
+</body>
+</html>
