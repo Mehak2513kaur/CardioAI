@@ -138,4 +138,4 @@ This tool is for **research and educational purposes only**. It is not a substit
 
 ---
 ---
-**Developed with ❤️ by arpit for Modern Cardiology**
+**Developed with ❤️ by mehakmeet for Modern Cardiology**
