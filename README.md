@@ -1,18 +1,10 @@
----
-title: CardioAI
-emoji: 🫀
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-pinned: false
-app_file: app.py
----
 # 🫀 CardioAI: Advanced Cardiac Diagnostic Intelligence
 
 [![React](https://img.shields.io/badge/Frontend-React%2018-blue?logo=react)](https://reactjs.org/)
 [![Flask](https://img.shields.io/badge/Backend-Flask%203.0-lightgrey?logo=flask)](https://flask.palletsprojects.com/)
 [![Scikit-Learn](https://img.shields.io/badge/ML-Scikit--Learn-orange?logo=scikit-learn)](https://scikit-learn.org/)
 [![Vite](https://img.shields.io/badge/Build-Vite-646CFF?logo=vite)](https://vitejs.dev/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-HuggingFace-FFD21E?logo=huggingface)](https://mehak-13-cardioai.hf.space)
 
 CoronaryAI is a medical-grade computer vision platform designed to detect blockages in coronary angiograms. It combines an optimized **RF+SVM Ensemble** machine learning pipeline with clinical-grade **Explainable AI (XAI)** visualizations and automated medical reporting.
 
